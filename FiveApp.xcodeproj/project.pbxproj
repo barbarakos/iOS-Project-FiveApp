@@ -7,23 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		41A7277A16B3F6B4461E5BAE /* Pods_FiveApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECDFB52E8B8D302C22C240C1 /* Pods_FiveApp.framework */; };
 		E7D576D22845321E00B52A54 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576D12845321E00B52A54 /* AppDelegate.swift */; };
 		E7D576D42845321E00B52A54 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576D32845321E00B52A54 /* SceneDelegate.swift */; };
-		E7D576D62845321E00B52A54 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576D52845321E00B52A54 /* ViewController.swift */; };
-		E7D576D92845321E00B52A54 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D576D72845321E00B52A54 /* Main.storyboard */; };
 		E7D576DB2845321F00B52A54 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7D576DA2845321F00B52A54 /* Assets.xcassets */; };
 		E7D576DE2845321F00B52A54 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7D576DC2845321F00B52A54 /* LaunchScreen.storyboard */; };
+		E7D576EC2845566700B52A54 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = E7D576EB2845566700B52A54 /* SnapKit */; };
+		E7D576EE2845594300B52A54 /* MainNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576ED2845594300B52A54 /* MainNavigationController.swift */; };
+		E7D576F028455A0C00B52A54 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576EF28455A0C00B52A54 /* MainTabBarController.swift */; };
+		E7D576F428455A7500B52A54 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576F328455A7500B52A54 /* LogInViewController.swift */; };
+		E7D576F628455AC700B52A54 /* ChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576F528455AC700B52A54 /* ChatsViewController.swift */; };
+		E7D576F828455ADC00B52A54 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576F728455ADC00B52A54 /* ProfileViewController.swift */; };
+		E7D576FA28455AF800B52A54 /* MaterialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576F928455AF700B52A54 /* MaterialsViewController.swift */; };
+		E7D576FC2845627A00B52A54 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576FB2845627A00B52A54 /* RegisterViewController.swift */; };
+		E7D576FE284562CB00B52A54 /* NewChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D576FD284562CB00B52A54 /* NewChatViewController.swift */; };
+		E7D5770228461FB200B52A54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7D5770128461FB200B52A54 /* GoogleService-Info.plist */; };
+		E7D5770428462D1200B52A54 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770328462D1200B52A54 /* MainViewController.swift */; };
+		E7D5770628463C2100B52A54 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770528463C2100B52A54 /* DatabaseManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1E7410885F64DC9417358A0A /* Pods-FiveApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveApp.debug.xcconfig"; path = "Target Support Files/Pods-FiveApp/Pods-FiveApp.debug.xcconfig"; sourceTree = "<group>"; };
+		D0DEA128CD16666C3900E122 /* Pods-FiveApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FiveApp.release.xcconfig"; path = "Target Support Files/Pods-FiveApp/Pods-FiveApp.release.xcconfig"; sourceTree = "<group>"; };
 		E7D576CE2845321E00B52A54 /* FiveApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FiveApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7D576D12845321E00B52A54 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7D576D32845321E00B52A54 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		E7D576D52845321E00B52A54 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E7D576D82845321E00B52A54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7D576DA2845321F00B52A54 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7D576DD2845321F00B52A54 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7D576DF2845321F00B52A54 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E7D576ED2845594300B52A54 /* MainNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainNavigationController.swift; sourceTree = "<group>"; };
+		E7D576EF28455A0C00B52A54 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		E7D576F328455A7500B52A54 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
+		E7D576F528455AC700B52A54 /* ChatsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsViewController.swift; sourceTree = "<group>"; };
+		E7D576F728455ADC00B52A54 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		E7D576F928455AF700B52A54 /* MaterialsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaterialsViewController.swift; sourceTree = "<group>"; };
+		E7D576FB2845627A00B52A54 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
+		E7D576FD284562CB00B52A54 /* NewChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChatViewController.swift; sourceTree = "<group>"; };
+		E7D5770128461FB200B52A54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E7D5770328462D1200B52A54 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		E7D5770528463C2100B52A54 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		ECDFB52E8B8D302C22C240C1 /* Pods_FiveApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FiveApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +54,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E7D576EC2845566700B52A54 /* SnapKit in Frameworks */,
+				41A7277A16B3F6B4461E5BAE /* Pods_FiveApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		54A9DE7E7994D92CCCBF129E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECDFB52E8B8D302C22C240C1 /* Pods_FiveApp.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		78054F0E6BAC02EC8E32D5EB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				1E7410885F64DC9417358A0A /* Pods-FiveApp.debug.xcconfig */,
+				D0DEA128CD16666C3900E122 /* Pods-FiveApp.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		E7D576C52845321E00B52A54 = {
 			isa = PBXGroup;
 			children = (
 				E7D576D02845321E00B52A54 /* FiveApp */,
 				E7D576CF2845321E00B52A54 /* Products */,
+				78054F0E6BAC02EC8E32D5EB /* Pods */,
+				54A9DE7E7994D92CCCBF129E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +100,80 @@
 		E7D576D02845321E00B52A54 /* FiveApp */ = {
 			isa = PBXGroup;
 			children = (
-				E7D576D12845321E00B52A54 /* AppDelegate.swift */,
-				E7D576D32845321E00B52A54 /* SceneDelegate.swift */,
-				E7D576D52845321E00B52A54 /* ViewController.swift */,
-				E7D576D72845321E00B52A54 /* Main.storyboard */,
-				E7D576DA2845321F00B52A54 /* Assets.xcassets */,
+				E7D576E9284533A300B52A54 /* Resources */,
+				E7D576E82845339C00B52A54 /* ViewModels */,
+				E7D576E72845339500B52A54 /* Models */,
+				E7D576E62845338E00B52A54 /* Views */,
+				E7D576E52845338200B52A54 /* Controllers */,
 				E7D576DC2845321F00B52A54 /* LaunchScreen.storyboard */,
 				E7D576DF2845321F00B52A54 /* Info.plist */,
+				E7D5770128461FB200B52A54 /* GoogleService-Info.plist */,
 			);
 			path = FiveApp;
+			sourceTree = "<group>";
+		};
+		E7D576E52845338200B52A54 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7D57700284565F700B52A54 /* Login&Registration */,
+				E7D576FF284562DD00B52A54 /* TabBarMainControllers */,
+				E7D576ED2845594300B52A54 /* MainNavigationController.swift */,
+				E7D576EF28455A0C00B52A54 /* MainTabBarController.swift */,
+				E7D576FD284562CB00B52A54 /* NewChatViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		E7D576E62845338E00B52A54 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		E7D576E72845339500B52A54 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		E7D576E82845339C00B52A54 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		E7D576E9284533A300B52A54 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				E7D576D12845321E00B52A54 /* AppDelegate.swift */,
+				E7D576D32845321E00B52A54 /* SceneDelegate.swift */,
+				E7D5770528463C2100B52A54 /* DatabaseManager.swift */,
+				E7D576DA2845321F00B52A54 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		E7D576FF284562DD00B52A54 /* TabBarMainControllers */ = {
+			isa = PBXGroup;
+			children = (
+				E7D5770328462D1200B52A54 /* MainViewController.swift */,
+				E7D576F528455AC700B52A54 /* ChatsViewController.swift */,
+				E7D576F928455AF700B52A54 /* MaterialsViewController.swift */,
+				E7D576F728455ADC00B52A54 /* ProfileViewController.swift */,
+			);
+			path = TabBarMainControllers;
+			sourceTree = "<group>";
+		};
+		E7D57700284565F700B52A54 /* Login&Registration */ = {
+			isa = PBXGroup;
+			children = (
+				E7D576F328455A7500B52A54 /* LogInViewController.swift */,
+				E7D576FB2845627A00B52A54 /* RegisterViewController.swift */,
+			);
+			path = "Login&Registration";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,15 +183,20 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7D576E22845321F00B52A54 /* Build configuration list for PBXNativeTarget "FiveApp" */;
 			buildPhases = (
+				425D4A52D17A3DE49D14D384 /* [CP] Check Pods Manifest.lock */,
 				E7D576CA2845321E00B52A54 /* Sources */,
 				E7D576CB2845321E00B52A54 /* Frameworks */,
 				E7D576CC2845321E00B52A54 /* Resources */,
+				D5F0D8DB0C36D8BA50E86396 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
 			name = FiveApp;
+			packageProductDependencies = (
+				E7D576EB2845566700B52A54 /* SnapKit */,
+			);
 			productName = FiveApp;
 			productReference = E7D576CE2845321E00B52A54 /* FiveApp.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +225,9 @@
 				Base,
 			);
 			mainGroup = E7D576C52845321E00B52A54;
+			packageReferences = (
+				E7D576EA2845566700B52A54 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = E7D576CF2845321E00B52A54 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -127,34 +244,77 @@
 			files = (
 				E7D576DE2845321F00B52A54 /* LaunchScreen.storyboard in Resources */,
 				E7D576DB2845321F00B52A54 /* Assets.xcassets in Resources */,
-				E7D576D92845321E00B52A54 /* Main.storyboard in Resources */,
+				E7D5770228461FB200B52A54 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		425D4A52D17A3DE49D14D384 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-FiveApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		D5F0D8DB0C36D8BA50E86396 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FiveApp/Pods-FiveApp-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-FiveApp/Pods-FiveApp-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-FiveApp/Pods-FiveApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E7D576CA2845321E00B52A54 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7D576D62845321E00B52A54 /* ViewController.swift in Sources */,
+				E7D576FC2845627A00B52A54 /* RegisterViewController.swift in Sources */,
+				E7D5770428462D1200B52A54 /* MainViewController.swift in Sources */,
+				E7D576EE2845594300B52A54 /* MainNavigationController.swift in Sources */,
+				E7D576FA28455AF800B52A54 /* MaterialsViewController.swift in Sources */,
 				E7D576D22845321E00B52A54 /* AppDelegate.swift in Sources */,
+				E7D576F028455A0C00B52A54 /* MainTabBarController.swift in Sources */,
+				E7D576F428455A7500B52A54 /* LogInViewController.swift in Sources */,
+				E7D576F828455ADC00B52A54 /* ProfileViewController.swift in Sources */,
+				E7D5770628463C2100B52A54 /* DatabaseManager.swift in Sources */,
+				E7D576F628455AC700B52A54 /* ChatsViewController.swift in Sources */,
 				E7D576D42845321E00B52A54 /* SceneDelegate.swift in Sources */,
+				E7D576FE284562CB00B52A54 /* NewChatViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		E7D576D72845321E00B52A54 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E7D576D82845321E00B52A54 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		E7D576DC2845321F00B52A54 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -273,6 +433,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
@@ -282,6 +443,7 @@
 		};
 		E7D576E32845321F00B52A54 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1E7410885F64DC9417358A0A /* Pods-FiveApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -291,7 +453,7 @@
 				INFOPLIST_FILE = FiveApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -309,6 +471,7 @@
 		};
 		E7D576E42845321F00B52A54 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D0DEA128CD16666C3900E122 /* Pods-FiveApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -318,7 +481,7 @@
 				INFOPLIST_FILE = FiveApp/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -356,6 +519,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		E7D576EA2845566700B52A54 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		E7D576EB2845566700B52A54 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = E7D576EA2845566700B52A54 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = E7D576C62845321E00B52A54 /* Project object */;
 }

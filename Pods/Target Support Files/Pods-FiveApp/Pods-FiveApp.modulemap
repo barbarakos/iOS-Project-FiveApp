@@ -1,0 +1,6 @@
+framework module Pods_FiveApp {
+  umbrella header "Pods-FiveApp-umbrella.h"
+
+  export *
+  module * { export * }
+}
