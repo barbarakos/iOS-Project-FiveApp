@@ -24,6 +24,7 @@
 		E7D5770228461FB200B52A54 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E7D5770128461FB200B52A54 /* GoogleService-Info.plist */; };
 		E7D5770428462D1200B52A54 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770328462D1200B52A54 /* MainViewController.swift */; };
 		E7D5770628463C2100B52A54 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770528463C2100B52A54 /* DatabaseManager.swift */; };
+		E7D5770828466E1700B52A54 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770728466E1700B52A54 /* ConversationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		E7D5770128461FB200B52A54 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E7D5770328462D1200B52A54 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		E7D5770528463C2100B52A54 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		E7D5770728466E1700B52A54 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		ECDFB52E8B8D302C22C240C1 /* Pods_FiveApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FiveApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -120,6 +122,7 @@
 				E7D576ED2845594300B52A54 /* MainNavigationController.swift */,
 				E7D576EF28455A0C00B52A54 /* MainTabBarController.swift */,
 				E7D576FD284562CB00B52A54 /* NewChatViewController.swift */,
+				E7D5770728466E1700B52A54 /* ConversationViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				E7D576FC2845627A00B52A54 /* RegisterViewController.swift in Sources */,
 				E7D5770428462D1200B52A54 /* MainViewController.swift in Sources */,
 				E7D576EE2845594300B52A54 /* MainNavigationController.swift in Sources */,
+				E7D5770828466E1700B52A54 /* ConversationViewController.swift in Sources */,
 				E7D576FA28455AF800B52A54 /* MaterialsViewController.swift in Sources */,
 				E7D576D22845321E00B52A54 /* AppDelegate.swift in Sources */,
 				E7D576F028455A0C00B52A54 /* MainTabBarController.swift in Sources */,

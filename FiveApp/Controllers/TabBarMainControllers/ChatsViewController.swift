@@ -7,13 +7,18 @@
 
 import UIKit
 import FirebaseAuth
+import JGProgressHUD
 
 class ChatsViewController: MainViewController {
+    
+    var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.title = "Chats"
+       
+        setNavigationItem()
+        buildViews()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -30,5 +35,72 @@ class ChatsViewController: MainViewController {
             present(nav, animated: false)
         }
     }
+    
+    func setNavigationItem() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(newConvoSearchTapped))
+        navigationItem.rightBarButtonItem?.tintColor = .white
+    }
+    
+    func buildViews() {
+        createViews()
+        styleViews()
+        defineLayoutForViews()
+    }
+    
+    func createViews() {
+        tableView = UITableView()
+        tableView.isHidden = true
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        view.addSubview(tableView)
+        configureTableView()
+        
+        fetchConversations()
+    }
+    
+    func styleViews() {
+        
+    }
+    
+    func defineLayoutForViews() {
+        tableView.snp.makeConstraints {
+            $0.top.bottom.leading.trailing.equalToSuperview()
+        }
+    }
+    
+    @objc func newConvoSearchTapped() {
+        let nav = UINavigationController(rootViewController: NewChatViewController())
+        present(nav, animated: true)
+    }
+    
+    func configureTableView() {
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    func fetchConversations() {
+        
+    }
+}
 
+extension ChatsViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
+        cell.textLabel?.text = "Hello world"
+        cell.accessoryType = .disclosureIndicator
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        let vc = ConversationViewController()
+        vc.title = "Jenny Smith"
+        vc.navigationItem.largeTitleDisplayMode = .never
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

@@ -12,7 +12,7 @@ class ProfileViewController: MainViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        navigationItem.title = "Profile"
+//        navigationItem.title = "Profile"
     }
     
 

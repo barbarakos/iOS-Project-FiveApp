@@ -8,8 +8,10 @@
 import UIKit
 import SnapKit
 import FirebaseAuth
+import JGProgressHUD
 
 class LogInViewController: UIViewController {
+    private let spinner = JGProgressHUD(style: .dark)
     
     var topView: UIView!
     var fiveImage: UIImageView!
@@ -163,10 +165,16 @@ class LogInViewController: UIViewController {
         }
         
         //Log-in
+        spinner.show(in: view)
         FirebaseAuth.Auth.auth().signIn(withEmail: email, password: password, completion: { [weak self] result, error in
             guard let strongSelf = self else {
                 return
             }
+            
+            DispatchQueue.main.async {
+                strongSelf.spinner.dismiss()
+            }
+            
             guard let _ = result, error == nil else {
                 print("Failed to log in user.")
                 return
