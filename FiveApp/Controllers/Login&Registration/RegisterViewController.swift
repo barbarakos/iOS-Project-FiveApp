@@ -248,7 +248,28 @@ class RegisterViewController: UIViewController {
                     admin = false
                 }
                 
-                DatabaseManager.shared.createUser(with: AppUser(username: username, email: email, admin: admin))
+                let appUser = AppUser(username: username, email: email, admin: admin)
+                DatabaseManager.shared.createUser(with: appUser, completion: { sucess in
+                    if sucess {
+                        //uploading image
+                        var image = UIImage(systemName: "person.circle")
+                        if admin == true {
+                            image = UIImage(named: "FivePng")
+                        }
+                        guard let data = image!.pngData() else {
+                            return
+                        }
+                        let fileName = appUser.profilePicFileName
+                        StorageManager.shared.uploadProfilePic(with: data, fileName: fileName, completionHandler: { result in
+                            switch result {
+                            case .success(let downloadURL):
+                                UserDefaults.standard.set(downloadURL, forKey: "profile_picture")
+                            case .failure(let error):
+                                print("Storage manager error: \(error)")
+                            }
+                        })
+                    }
+                })
                 
                 strongSelf.navigationController?.dismiss(animated: true)
                 
