@@ -91,11 +91,12 @@ extension ConversationViewController: InputBarAccessoryViewDelegate {
     }
     
     func createMessageId() -> String? {
-        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") else {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String else {
             return nil
         }
+        let safeCurrUserEmail = DatabaseManager.safeEmail(email: currentUserEmail)
         let dateString = Self.dateFormatter.string(from: Date())
-        let newId = "\(otherUserEmail)_\(currentUserEmail)_\(dateString)"
+        let newId = "\(otherUserEmail!)_\(safeCurrUserEmail)_\(dateString)"
         return newId
     }
 }
@@ -119,14 +120,41 @@ extension ConversationViewController: MessagesDataSource, MessagesLayoutDelegate
 }
 
 struct Message: MessageType {
-    var sender: SenderType
-    var messageId: String
-    var sentDate: Date
-    var kind: MessageKind
+    public var sender: SenderType
+    public var messageId: String
+    public var sentDate: Date
+    public var kind: MessageKind
+}
+
+extension MessageKind {
+    var description: String {
+        switch self {
+        case .text(_):
+            return "text"
+        case .attributedText(_):
+            return "attributedText"
+        case .photo(_):
+            return "photo"
+        case .video(_):
+            return "video"
+        case .location(_):
+            return "location"
+        case .emoji(_):
+            return "emoji"
+        case .audio(_):
+            return "audio"
+        case .contact(_):
+            return "contact"
+        case .linkPreview(_):
+            return "linkPreview"
+        case .custom(_):
+            return "custom"
+        }
+    }
 }
 
 struct Sender: SenderType {
-    var photoURL: String
-    var senderId: String
-    var displayName: String
+    public var photoURL: String
+    public var senderId: String
+    public var displayName: String
 }

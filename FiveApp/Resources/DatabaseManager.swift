@@ -99,7 +99,145 @@ extension DatabaseManager {
 extension DatabaseManager {
     
     public func createNewConvo(with otherUserEmail: String, firstMessage: Message, completion: @escaping (Bool) -> (Void)) {
+        guard let currentEmail = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        let safeEmail = DatabaseManager.safeEmail(email: currentEmail)
         
+        let reference = database.child("\(safeEmail)")
+        
+        reference.observeSingleEvent(of: .value, with: { snapshot in
+            guard var user = snapshot.value as? [String: Any] else {
+                completion(false)
+                return
+            }
+            
+            let massageDate = firstMessage.sentDate
+            let dateString = ConversationViewController.dateFormatter.string(from: massageDate)
+            var message = ""
+            
+            switch firstMessage.kind {
+            case .text(let messageText):
+                message = messageText
+            case .attributedText(_):
+                break
+            case .photo(_):
+                break
+            case .video(_):
+                break
+            case .location(_):
+                break
+            case .emoji(_):
+                break
+            case .audio(_):
+                break
+            case .contact(_):
+                break
+            case .linkPreview(_):
+                break
+            case .custom(_):
+                break
+            }
+            
+            let conversationId = "conversation_\(firstMessage.messageId)"
+            
+            let newConvoData: [String: Any] = [
+                "id": conversationId,
+                "otherUserEmail": otherUserEmail,
+                "latestMessage": [
+                    "date": dateString,
+                    "message": message,
+                    "isRead": false
+                ]
+            ]
+            
+            if var conversations = user["conversations"] as? [[String: Any]] {
+                //conversation exists for current user, should append
+                conversations.append(newConvoData)
+                user["conversations"] = conversations
+                
+                reference.setValue(user, withCompletionBlock: { [weak self] error, _ in
+                    guard error == nil else {
+                        completion(false)
+                        return
+                    }
+                    self?.finishConvoCreating(conversationId: conversationId, firstMessage: firstMessage, completion: completion)
+                })
+                
+            } else {
+                //conversation array doenst exist, should create it
+                user["conversations"] = [
+                    newConvoData
+                ]
+                
+                reference.setValue(user, withCompletionBlock: { [weak self] error, _ in
+                    guard error == nil else {
+                        completion(false)
+                        return
+                    }
+                    
+                    self?.finishConvoCreating(conversationId: conversationId, firstMessage: firstMessage, completion: completion)
+                })
+            }
+        })
+    }
+    
+    func finishConvoCreating(conversationId: String, firstMessage: Message, completion: @escaping (Bool) -> Void) {
+        var content = ""
+        switch firstMessage.kind {
+        case .text(let messageText):
+            content = messageText
+        case .attributedText(_):
+            break
+        case .photo(_):
+            break
+        case .video(_):
+            break
+        case .location(_):
+            break
+        case .emoji(_):
+            break
+        case .audio(_):
+            break
+        case .contact(_):
+            break
+        case .linkPreview(_):
+            break
+        case .custom(_):
+            break
+        }
+        
+        let massageDate = firstMessage.sentDate
+        let dateString = ConversationViewController.dateFormatter.string(from: massageDate)
+        
+        guard let em = UserDefaults.standard.value(forKey: "email") as? String else {
+            completion(false)
+            return
+        }
+        let currentUserEmail = DatabaseManager.safeEmail(email: em)
+        
+        let message: [String: Any] = [
+            "id": firstMessage.messageId,
+            "type": firstMessage.kind.description,
+            "content": content,
+            "date": dateString,
+            "senderEmail": currentUserEmail,
+            "isRead": false
+        ]
+        
+        let value: [String: Any] = [
+            "messages": [
+                message
+            ]
+        ]
+        
+        database.child("\(conversationId)").setValue(value, withCompletionBlock: { error, _ in
+            guard error == nil else {
+                completion(false)
+                return
+            }
+            completion(true)
+        })
     }
     
     public func getAllConvos(for email: String, completion: @escaping (Result<String, Error>) -> Void) {
