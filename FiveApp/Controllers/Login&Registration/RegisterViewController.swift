@@ -252,9 +252,9 @@ class RegisterViewController: UIViewController {
                 DatabaseManager.shared.createUser(with: appUser, completion: { sucess in
                     if sucess {
                         //uploading image
-                        var image = UIImage(systemName: "person.circle")
+                        var image = UIImage(named: "defaultProfilePic")
                         if admin == true {
-                            image = UIImage(named: "FivePng")
+                            image = UIImage(named: "FiveProfilePic")
                         }
                         guard let data = image!.pngData() else {
                             return

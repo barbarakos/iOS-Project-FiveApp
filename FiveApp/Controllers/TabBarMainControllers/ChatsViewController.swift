@@ -10,8 +10,10 @@ import FirebaseAuth
 import JGProgressHUD
 
 class ChatsViewController: MainViewController {
+    private let spinner = JGProgressHUD(style: .dark)
     
     var tableView: UITableView!
+    var noConversationsLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,33 +50,56 @@ class ChatsViewController: MainViewController {
     }
     
     func createViews() {
-        tableView = UITableView()
-        tableView.isHidden = true
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
-        view.addSubview(tableView)
-        configureTableView()
-        
         fetchConversations()
+        
+        tableView = UITableView()
+        tableView.isHidden = false
+        configureTableView()
+        view.addSubview(tableView)
+        
+        noConversationsLabel = UILabel()
+        noConversationsLabel.isHidden = true
+        view.addSubview(noConversationsLabel)
     }
     
     func styleViews() {
-        
+        noConversationsLabel.text = "No Conversations"
+        noConversationsLabel.textColor = .gray
+        noConversationsLabel.textAlignment = .center
+        noConversationsLabel.font = UIFont.systemFont(ofSize: 22, weight: UIFont.Weight.medium)
     }
     
     func defineLayoutForViews() {
         tableView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
+        
     }
     
     @objc func newConvoSearchTapped() {
-        let nav = UINavigationController(rootViewController: NewChatViewController())
+        let vc = NewChatViewController()
+        vc.completion = { [weak self] result in
+            self?.createNewConvo(result: result)
+        }
+        let nav = UINavigationController(rootViewController: vc)
         present(nav, animated: true)
+    }
+    
+    func createNewConvo(result: [String: String]) {
+        guard let username = result["username"], let email = result["email"] else {
+            return
+        }
+        let vc = ConversationViewController(with: email)
+        vc.isNewConvo = true
+        vc.title = username
+        vc.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
     }
     
     func fetchConversations() {
@@ -97,8 +122,9 @@ extension ChatsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let vc = ConversationViewController()
+        let vc = ConversationViewController(with: "blabla@gmail.com")
         vc.title = "Jenny Smith"
+        vc.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"))
         vc.navigationItem.largeTitleDisplayMode = .never
         
         navigationController?.pushViewController(vc, animated: true)

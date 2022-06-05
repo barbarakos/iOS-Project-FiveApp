@@ -160,7 +160,7 @@ class LogInViewController: UIViewController {
         
         guard let email = emailTextField.text, let password = passwordTextField.text, !email.isEmpty,
                 !password.isEmpty, password.count >= 6 else {
-            logInErrorAlert()
+            logInErrorAlert(message: "Please enter all information to log in.")
             return
         }
         
@@ -176,18 +176,19 @@ class LogInViewController: UIViewController {
             }
             
             guard let _ = result, error == nil else {
-                print("Failed to log in user.")
+                strongSelf.logInErrorAlert(message: "Wrong password and/or email!")
                 return
             }
-            print("loggedin")
+            UserDefaults.standard.set(email, forKey: "email")
+            
             strongSelf.navigationController?.dismiss(animated: true)
             
         })
         
     }
     
-    func logInErrorAlert() {
-        let alert = UIAlertController(title: "Error", message: "Please enter all information to log in.", preferredStyle: .alert)
+    func logInErrorAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Dismiss", style: .cancel, handler: nil))
         present(alert, animated: true)
     }

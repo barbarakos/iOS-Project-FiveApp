@@ -12,7 +12,26 @@ class MaterialsViewController: MainViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-//        navigationItem.title = "Materials"
+        
+        buildViews()
+    }
+    
+    func buildViews() {
+        createViews()
+        styleViews()
+        defineLayoutForViews()
+    }
+    
+    func createViews() {
+    
+    }
+    
+    func styleViews() {
+        
+    }
+    
+    func defineLayoutForViews() {
+        
     }
     
 
