@@ -110,7 +110,7 @@ class ChatsViewController: MainViewController {
         present(nav, animated: true)
     }
     
-    func createNewConvo(result: [String: String]) {
+    private func createNewConvo(result: [String: String]) {
         guard let username = result["username"], let email = result["email"] else {
             return
         }
@@ -148,7 +148,7 @@ extension ChatsViewController: UITableViewDelegate, UITableViewDataSource {
         let model = conversations[indexPath.row]
         
         let vc = ConversationViewController(with: model.otherUserEmail, id: model.id)
-        vc.navigationItem.title = model.name
+        vc.title = model.name
 //        vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }

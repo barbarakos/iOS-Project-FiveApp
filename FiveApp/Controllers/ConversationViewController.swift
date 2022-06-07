@@ -100,19 +100,29 @@ extension ConversationViewController: InputBarAccessoryViewDelegate {
         }
         
         print("sending")
-        
+        let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
         //send message
         if isNewConvo {
-            let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-            DatabaseManager.shared.createNewConvo(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
+            DatabaseManager.shared.createNewConvo(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { [weak self] success in
+                if success {
+                    print("message sent")
+                    self?.isNewConvo = false
+                } else {
+                    print("failed to send")
+                }
+            })
+        } else {
+            //append to existing convo
+            guard let conversationId = conversationId, let name = self.title else {
+                return
+            }
+            DatabaseManager.shared.sendMessage(to: conversationId, otherUserEmail: otherUserEmail, name: name, message: message, completion: { success in
                 if success {
                     print("message sent")
                 } else {
                     print("failed to send")
                 }
             })
-        } else {
-            //append to existing convo 
         }
     }
     
@@ -121,7 +131,7 @@ extension ConversationViewController: InputBarAccessoryViewDelegate {
             return nil
         }
         let safeCurrUserEmail = DatabaseManager.safeEmail(email: currentUserEmail)
-        let dateString = Self.dateFormatter.string(from: Date())
+        let dateString = Self.dateFormatter.string(from: Date()).replacingOccurrences(of: "/", with: "-")
         let newId = "\(otherUserEmail!)_\(safeCurrUserEmail)_\(dateString)"
         return newId
     }

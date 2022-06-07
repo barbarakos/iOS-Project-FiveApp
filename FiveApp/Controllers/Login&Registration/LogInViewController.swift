@@ -179,6 +179,21 @@ class LogInViewController: UIViewController {
                 strongSelf.logInErrorAlert(message: "Wrong password and/or email!")
                 return
             }
+            let safeEmail = DatabaseManager.safeEmail(email: email)
+            DatabaseManager.shared.getDataFor(path: safeEmail, completion: { result in
+                switch result {
+                case .success(let data):
+                    guard let userData = data as? [String: Any],
+                          let username = userData["username"] as? String,
+                          let admin = userData["admin"] as? Bool else {
+                        return
+                    }
+                    UserDefaults.standard.set(username, forKey: "username")
+                    UserDefaults.standard.set(admin, forKey: "admin")
+                case . failure(let error):
+                    print("Failed to fetch data: \(error)")
+                }
+            })
             UserDefaults.standard.set(email, forKey: "email")
             
             strongSelf.navigationController?.dismiss(animated: true)
