@@ -14,6 +14,8 @@ class ChatsViewController: MainViewController {
     
     var tableView: UITableView!
     var noConversationsLabel: UILabel!
+    
+    private var conversations = [Conversation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,7 @@ class ChatsViewController: MainViewController {
     
     func createViews() {
         fetchConversations()
+        startListeningForConversations()
         
         tableView = UITableView()
         tableView.isHidden = false
@@ -73,7 +76,29 @@ class ChatsViewController: MainViewController {
         tableView.snp.makeConstraints {
             $0.top.bottom.leading.trailing.equalToSuperview()
         }
-        
+    }
+    
+    func startListeningForConversations() {
+        guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
+            return
+        }
+        let safeEmail = DatabaseManager.safeEmail(email: email)
+        DatabaseManager.shared.getAllConvos(for: safeEmail, completion: { [weak self] result in
+            switch result {
+            case .success(let conversations):
+                guard !conversations.isEmpty else {
+                    return
+                }
+                
+                self?.conversations = conversations
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                }
+            case .failure(let error):
+                print("Failed to get conversations: \(error)")
+            }
+        })
     }
     
     @objc func newConvoSearchTapped() {
@@ -89,17 +114,16 @@ class ChatsViewController: MainViewController {
         guard let username = result["username"], let email = result["email"] else {
             return
         }
-        let vc = ConversationViewController(with: email)
+        let vc = ConversationViewController(with: email, id: nil)
         vc.isNewConvo = true
         vc.title = username
-        vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
     
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        tableView.register(ChatsTableViewCell.self, forCellReuseIdentifier: ChatsTableViewCell.id)
     }
     
     func fetchConversations() {
@@ -109,24 +133,40 @@ class ChatsViewController: MainViewController {
 
 extension ChatsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return conversations.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        cell.textLabel?.text = "Hello world"
-        cell.accessoryType = .disclosureIndicator
+        let cell = tableView.dequeueReusableCell(withIdentifier: ChatsTableViewCell.id, for: indexPath) as! ChatsTableViewCell
+        let model = conversations[indexPath.row]
+        cell.configure(with: model)
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let model = conversations[indexPath.row]
         
-        let vc = ConversationViewController(with: "blabla@gmail.com")
-        vc.title = "Jenny Smith"
-        vc.navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"))
-        vc.navigationItem.largeTitleDisplayMode = .never
-        
+        let vc = ConversationViewController(with: model.otherUserEmail, id: model.id)
+        vc.navigationItem.title = model.name
+//        vc.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(vc, animated: true)
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120
+    }
+}
+
+struct Conversation {
+    let id: String
+    let name: String
+    let otherUserEmail: String
+    let latestMessage: LatestMessage
+}
+
+struct LatestMessage {
+    let date: String
+    let text: String
+    let isRead: Bool
 }

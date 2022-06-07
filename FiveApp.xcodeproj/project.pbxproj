@@ -26,6 +26,7 @@
 		E7D5770628463C2100B52A54 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770528463C2100B52A54 /* DatabaseManager.swift */; };
 		E7D5770828466E1700B52A54 /* ConversationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770728466E1700B52A54 /* ConversationViewController.swift */; };
 		E7D5770A28491FDD00B52A54 /* StorageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770928491FDD00B52A54 /* StorageManager.swift */; };
+		E7D5770C284D5A4900B52A54 /* ChatsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7D5770B284D5A4900B52A54 /* ChatsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		E7D5770528463C2100B52A54 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		E7D5770728466E1700B52A54 /* ConversationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConversationViewController.swift; sourceTree = "<group>"; };
 		E7D5770928491FDD00B52A54 /* StorageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StorageManager.swift; sourceTree = "<group>"; };
+		E7D5770B284D5A4900B52A54 /* ChatsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatsTableViewCell.swift; sourceTree = "<group>"; };
 		ECDFB52E8B8D302C22C240C1 /* Pods_FiveApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FiveApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -132,6 +134,7 @@
 		E7D576E62845338E00B52A54 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E7D5770B284D5A4900B52A54 /* ChatsTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E7D576FC2845627A00B52A54 /* RegisterViewController.swift in Sources */,
+				E7D5770C284D5A4900B52A54 /* ChatsTableViewCell.swift in Sources */,
 				E7D5770428462D1200B52A54 /* MainViewController.swift in Sources */,
 				E7D576EE2845594300B52A54 /* MainNavigationController.swift in Sources */,
 				E7D5770A28491FDD00B52A54 /* StorageManager.swift in Sources */,

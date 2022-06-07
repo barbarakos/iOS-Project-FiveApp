@@ -19,6 +19,7 @@ class ConversationViewController: MessagesViewController {
     }()
     
     public var isNewConvo = false
+    private var conversationId: String?
     public let otherUserEmail: String!
     
     private var messages = [Message]()
@@ -27,11 +28,14 @@ class ConversationViewController: MessagesViewController {
         guard let email = UserDefaults.standard.value(forKey: "email") as? String else {
             return nil
         }
+        let safeEmail = DatabaseManager.safeEmail(email: email)
         return Sender(photoURL: "",
-               senderId: email,
-               displayName: "Joe Smith")
+               senderId: safeEmail,
+               displayName: "Me")
     }
-    init(with email: String) {
+    
+    init(with email: String, id: String?) {
+        self.conversationId = id
         self.otherUserEmail = email
         super.init(nibName: nil, bundle: nil)
     }
@@ -43,6 +47,7 @@ class ConversationViewController: MessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .red
+        
         setNavigationItem()
         configure()
     }
@@ -50,7 +55,11 @@ class ConversationViewController: MessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         messageInputBar.inputTextView.becomeFirstResponder()
+        if let convId = conversationId {
+            listenForMessages(id: convId)
+        }
     }
+    
     
     func configure() {
         messagesCollectionView.messagesDataSource = self
@@ -60,8 +69,25 @@ class ConversationViewController: MessagesViewController {
     }
     
     func setNavigationItem() {
-        navigationController?.navigationBar.barTintColor = .white
-        navigationItem.backBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "chevron.backward"))
+        
+    }
+    
+    func listenForMessages(id: String) {
+        DatabaseManager.shared.getAllMessagesForConvo(with: id, completion: { [weak self] result in
+            switch result {
+            case .success(let messages):
+                guard !messages.isEmpty else {
+                    return
+                }
+                self?.messages = messages
+                
+                DispatchQueue.main.async {
+                    self?.messagesCollectionView.reloadDataAndKeepOffset()
+                }
+            case .failure(let error):
+                print("Failed to get messages: \(error)")
+            }
+        })
     }
 
 }
@@ -78,7 +104,7 @@ extension ConversationViewController: InputBarAccessoryViewDelegate {
         //send message
         if isNewConvo {
             let message = Message(sender: selfSender, messageId: messageId, sentDate: Date(), kind: .text(text))
-            DatabaseManager.shared.createNewConvo(with: otherUserEmail, firstMessage: message, completion: { success in
+            DatabaseManager.shared.createNewConvo(with: otherUserEmail, name: self.title ?? "User", firstMessage: message, completion: { success in
                 if success {
                     print("message sent")
                 } else {
@@ -107,7 +133,6 @@ extension ConversationViewController: MessagesDataSource, MessagesLayoutDelegate
             return sender
         }
         fatalError("Sender is nil")
-        return Sender(photoURL: "", senderId: "", displayName: "")
     }
     
     func messageForItem(at indexPath: IndexPath, in messagesCollectionView: MessagesCollectionView) -> MessageType {
