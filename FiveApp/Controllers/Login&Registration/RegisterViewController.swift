@@ -223,8 +223,8 @@ final class RegisterViewController: UIViewController {
         }
         
         bottomStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(90)
-            $0.trailing.equalToSuperview().inset(90)
+            $0.leading.equalToSuperview().offset(70)
+            $0.trailing.equalToSuperview().inset(70)
             $0.bottom.equalToSuperview().inset(60)
         }
         

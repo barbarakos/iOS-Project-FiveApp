@@ -127,7 +127,7 @@ final class LogInViewController: UIViewController {
         
         bottomStackView.axis = .horizontal
         bottomStackView.spacing = 3
-        bottomStackView.distribution = .fillProportionally
+        bottomStackView.distribution = .fill
     }
     
     func defineLayoutForViews() {
@@ -157,8 +157,8 @@ final class LogInViewController: UIViewController {
         }
         
         bottomStackView.snp.makeConstraints {
-            $0.leading.equalToSuperview().offset(75)
-            $0.trailing.equalToSuperview().inset(75)
+            $0.leading.equalToSuperview().offset(45)
+            $0.trailing.equalToSuperview().inset(45)
             $0.bottom.equalToSuperview().inset(60)
         }
         
