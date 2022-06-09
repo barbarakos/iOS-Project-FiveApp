@@ -12,7 +12,6 @@ pod 'Firebase/Storage'
 
 pod 'MessageKit'
 pod 'JGProgressHUD'
-pod 'RealmSwift'
 pod 'SDWebImage'
 
 end

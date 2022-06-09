@@ -126,11 +126,6 @@ PODS:
   - nanopb/decode (2.30909.0)
   - nanopb/encode (2.30909.0)
   - PromisesObjC (2.1.0)
-  - Realm (10.27.0):
-    - Realm/Headers (= 10.27.0)
-  - Realm/Headers (10.27.0)
-  - RealmSwift (10.27.0):
-    - Realm (= 10.27.0)
   - SDWebImage (5.12.5):
     - SDWebImage/Core (= 5.12.5)
   - SDWebImage/Core (5.12.5)
@@ -142,7 +137,6 @@ DEPENDENCIES:
   - Firebase/Storage
   - JGProgressHUD
   - MessageKit
-  - RealmSwift
   - SDWebImage
 
 SPEC REPOS:
@@ -170,8 +164,6 @@ SPEC REPOS:
     - MessageKit
     - nanopb
     - PromisesObjC
-    - Realm
-    - RealmSwift
     - SDWebImage
 
 SPEC CHECKSUMS:
@@ -198,10 +190,8 @@ SPEC CHECKSUMS:
   MessageKit: a1ba0c69ebead94029867853eb44dd05b9b3f453
   nanopb: b552cce312b6c8484180ef47159bc0f65a1f0431
   PromisesObjC: 99b6f43f9e1044bd87a95a60beff28c2c44ddb72
-  Realm: 9ca328bd7e700cc19703799785e37f77d1a130f2
-  RealmSwift: 271de77b09a73c5e46ee3252283878153bd5d288
   SDWebImage: 0905f1b7760fc8ac4198cae0036600d67478751e
 
-PODFILE CHECKSUM: 059b8ab2c1f5ea920e8da789728e0a2f6f4a4d0e
+PODFILE CHECKSUM: a1ff01d120df7d23f0efe8efa9d3fd62745033e4
 
 COCOAPODS: 1.11.3
