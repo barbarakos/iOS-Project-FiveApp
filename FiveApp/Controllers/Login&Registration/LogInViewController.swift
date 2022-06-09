@@ -10,7 +10,7 @@ import SnapKit
 import FirebaseAuth
 import JGProgressHUD
 
-class LogInViewController: UIViewController {
+final class LogInViewController: UIViewController {
     private let spinner = JGProgressHUD(style: .dark)
     
     var topView: UIView!
@@ -24,12 +24,28 @@ class LogInViewController: UIViewController {
     var bottomStackView: UIStackView!
     var noAccountLabel: UILabel!
     var goToRegisterBtn: UIButton!
+    
+    private var loginObserver: NSObjectProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        loginObserver = NotificationCenter.default.addObserver(forName: .didLogInNotification, object: nil, queue: .main, using: { [weak self] _ in
+            guard let strongSelf = self else {
+                return
+            }
+            
+            strongSelf.navigationController?.dismiss(animated: true)
+        })
+        
         buildViews()
+    }
+    
+    deinit {
+        if let observer = loginObserver {
+            NotificationCenter.default.removeObserver(observer)
+        }
     }
     
     func buildViews() {
@@ -196,6 +212,7 @@ class LogInViewController: UIViewController {
             })
             UserDefaults.standard.set(email, forKey: "email")
             
+//            NotificationCenter.default.post(name: .didLogInNotification, object: nil)
             strongSelf.navigationController?.dismiss(animated: true)
             
         })

@@ -15,10 +15,12 @@ class MainViewController: UIViewController {
 
         let navBarAppearance = UINavigationBarAppearance()
         navigationController?.navigationBar.isTranslucent = false
+        
+        navBarAppearance.titleTextAttributes = [.font: UIFont.systemFont(ofSize: 21, weight: .medium), .foregroundColor: UIColor.white]
         navBarAppearance.backgroundColor = UIColor(red: 149/255, green: 93/255, blue: 55/255, alpha: 0.9)
         navigationController?.navigationBar.standardAppearance = navBarAppearance
         navigationController?.navigationBar.scrollEdgeAppearance = navBarAppearance
-        navigationController?.navigationBar.barStyle = .black
+//        navigationController?.navigationBar.barStyle = .black
 //        navigationController?.navigationBar.prefersLargeTitles = true
 //        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         

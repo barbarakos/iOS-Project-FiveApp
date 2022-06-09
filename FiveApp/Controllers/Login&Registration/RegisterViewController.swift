@@ -9,9 +9,11 @@ import UIKit
 import FirebaseAuth
 import JGProgressHUD
 
-class RegisterViewController: UIViewController {
+final class RegisterViewController: UIViewController {
     private let spinner = JGProgressHUD(style: .dark)
 
+    var currentChoice: String!
+    
     var topView: UIView!
     var fiveImage: UIImageView!
     var vjestinaLabel: UILabel!
@@ -20,6 +22,7 @@ class RegisterViewController: UIViewController {
     var usernameTextField: UITextField!
     var passwordTextField: UITextField!
     var flow: UISegmentedControl!
+    var keyTextField: UITextField!
     var registerBtn: UIButton!
     
     var bottomStackView: UIStackView!
@@ -51,9 +54,13 @@ class RegisterViewController: UIViewController {
         emailTextField = UITextField()
         usernameTextField = UITextField()
         passwordTextField = UITextField()
+        keyTextField = UITextField()
+        keyTextField.isHidden = true
         flow = UISegmentedControl(items: ["Student", "Admin"])
+        currentChoice = "Student"
+        flow.addTarget(self, action: #selector(flowChange), for: .valueChanged)
         registerBtn = UIButton(type: .system)
-        stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, flow, registerBtn])
+        stackView = UIStackView(arrangedSubviews: [emailTextField, usernameTextField, passwordTextField, flow, keyTextField, registerBtn])
         view.addSubview(stackView)
         
         haveAccountLabel = UILabel()
@@ -64,7 +71,7 @@ class RegisterViewController: UIViewController {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         usernameTextField.delegate = self
-        
+        keyTextField.delegate = self
     }
     
     func styleViews() {
@@ -106,6 +113,14 @@ class RegisterViewController: UIViewController {
         passwordTextField.returnKeyType = .done
         passwordTextField.backgroundColor = UIColor(red: 149/255, green: 93/255, blue: 55/255, alpha: 0.1)
         
+        keyTextField.placeholder = "Enter admin key"
+        keyTextField.isSecureTextEntry = true
+        keyTextField.borderStyle = .roundedRect
+        keyTextField.autocapitalizationType = .none
+        keyTextField.autocorrectionType = .no
+        keyTextField.returnKeyType = .done
+        keyTextField.backgroundColor = UIColor(red: 149/255, green: 93/255, blue: 55/255, alpha: 0.1)
+        
         flow.layer.cornerRadius = 5
         flow.selectedSegmentIndex = 0
         let titleAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -135,6 +150,28 @@ class RegisterViewController: UIViewController {
         bottomStackView.distribution = .fillProportionally
     }
     
+    @objc private func flowChange() {
+        if currentChoice == "Admin" {
+            currentChoice = "Student"
+            keyTextField.isHidden = true
+            stackView.snp.remakeConstraints {
+                $0.top.equalTo(topView.snp.bottom).offset(40)
+                $0.leading.equalToSuperview().offset(40)
+                $0.trailing.equalToSuperview().inset(40)
+                $0.height.equalTo(315)
+            }
+        } else {
+            currentChoice = "Admin"
+            keyTextField.isHidden = false
+            stackView.snp.remakeConstraints {
+                $0.top.equalTo(topView.snp.bottom).offset(40)
+                $0.leading.equalToSuperview().offset(40)
+                $0.trailing.equalToSuperview().inset(40)
+                $0.height.equalTo(390)
+            }
+        }
+    }
+    
     func defineLayoutForViews() {
         topView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(-15)
@@ -158,7 +195,7 @@ class RegisterViewController: UIViewController {
             $0.top.equalTo(topView.snp.bottom).offset(40)
             $0.leading.equalToSuperview().offset(40)
             $0.trailing.equalToSuperview().inset(40)
-            $0.bottom.equalTo(stackView.snp.top).offset(315)
+            $0.height.equalTo(315)
         }
         
         emailTextField.snp.makeConstraints {
@@ -170,6 +207,10 @@ class RegisterViewController: UIViewController {
         }
         
         passwordTextField.snp.makeConstraints {
+            $0.height.equalTo(57)
+        }
+        
+        keyTextField.snp.makeConstraints {
             $0.height.equalTo(57)
         }
         
@@ -210,8 +251,11 @@ class RegisterViewController: UIViewController {
         
         let flowChosen = flow.titleForSegment(at: flow.selectedSegmentIndex)
         if flowChosen == "Admin" {
-            if password != "QfTjWnZr4u7x!A%D*G-JaNdRgUkXp2s5v8y/B?E(H+MbPeShVmYq3t6w9z$C&F)J" {
-                errorAlert(message: "Incorrect password for admin!")
+            guard let key = keyTextField.text else {
+                return
+            }
+            if key != "QfTjWnZr4u7x!A%D*G-JaNdRgUkXp2s5v8y/B?E(H+MbPeShVmYq3t6w9z$C&F)J" {
+                errorAlert(message: "Incorrect key for admin!")
                 return
             }
         }
@@ -247,6 +291,10 @@ class RegisterViewController: UIViewController {
                 } else {
                     admin = false
                 }
+                
+                UserDefaults.standard.set(email, forKey: "email")
+                UserDefaults.standard.set(username, forKey: "username")
+                UserDefaults.standard.set(admin, forKey: "admin")
                 
                 let appUser = AppUser(username: username, email: email, admin: admin)
                 DatabaseManager.shared.createUser(with: appUser, completion: { sucess in

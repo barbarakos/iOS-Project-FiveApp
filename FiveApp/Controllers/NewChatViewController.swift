@@ -8,12 +8,12 @@
 import UIKit
 import JGProgressHUD
 
-class NewChatViewController: UIViewController {
-    public var completion: (([String: String]) -> (Void))?
+final class NewChatViewController: UIViewController {
+    public var completion: ((SearchResult) -> (Void))?
     private let spinner = JGProgressHUD(style: .dark)
     
     private var users = [[String: String]]()
-    private var results = [[String: String]]()
+    private var results = [SearchResult]()
     private var hasFetchedUsers = false
     
     var searchBar: UISearchBar!
@@ -67,7 +67,8 @@ class NewChatViewController: UIViewController {
         }
         
         noUsersLabel.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
+            $0.leading.trailing.equalToSuperview()
+            $0.centerX.centerY.equalToSuperview()
             $0.height.equalTo(150)
         }
     }
@@ -75,7 +76,7 @@ class NewChatViewController: UIViewController {
     func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        tableView.register(NewChatTableViewCell.self, forCellReuseIdentifier: NewChatTableViewCell.id)
     }
     
     @objc func dismissSelf() {
@@ -91,8 +92,9 @@ extension NewChatViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        cell.textLabel?.text = results[indexPath.row]["username"]
+        let model = results[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: NewChatTableViewCell.id, for: indexPath) as! NewChatTableViewCell
+        cell.configure(with: model)
         return cell
     }
     
@@ -102,6 +104,10 @@ extension NewChatViewController: UITableViewDelegate, UITableViewDataSource {
         dismiss(animated: true, completion: { [weak self] in
             self?.completion?(userData)
         })
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 90
     }
 }
 
@@ -114,7 +120,7 @@ extension NewChatViewController: UISearchBarDelegate {
         searchBar.resignFirstResponder()
         results.removeAll()
         spinner.show(in: view)
-        self.searchUsers(query: text)
+        searchUsers(query: text)
     }
     
     func searchUsers(query: String) {
@@ -136,30 +142,46 @@ extension NewChatViewController: UISearchBarDelegate {
     }
     
     func filterUsers(with search: String) {
-        guard hasFetchedUsers else {
+        guard let currentUserEmail = UserDefaults.standard.value(forKey: "email") as? String, hasFetchedUsers else {
             return
         }
+        let safeEmail = DatabaseManager.safeEmail(email: currentUserEmail)
         
-        self.spinner.dismiss(animated: true)
+        spinner.dismiss(animated: true)
         
-        let results: [[String: String]] = self.users.filter({
+        let results: [SearchResult] = users.filter({
+            guard let email = $0["email"], email != safeEmail else {
+                return false
+            }
+            
             guard let username = $0["username"]?.lowercased() else {
                 return false
             }
+            
             return username.hasPrefix(search.lowercased())
+        }).compactMap({
+            guard let email = $0["email"], let username = $0["username"] else {
+                return nil
+            }
+            return SearchResult(username: username, email: email)
         })
+        
         self.results = results
+        
         updateUI()
     }
     
     func updateUI() {
         if results.isEmpty {
-            self.noUsersLabel.isHidden = false
-            self.tableView.isHidden = true
+            noUsersLabel.isHidden = false
+            tableView.isHidden = true
         } else {
-            self.noUsersLabel.isHidden = true
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
+            noUsersLabel.isHidden = true
+            tableView.isHidden = false
+            tableView.reloadData()
         }
     }
 }
+
+
+

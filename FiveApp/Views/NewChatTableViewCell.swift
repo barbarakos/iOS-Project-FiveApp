@@ -1,19 +1,20 @@
 //
-//  ChatsTableViewCell.swift
+//  NewChatTableViewCell.swift
 //  FiveApp
 //
-//  Created by Barbara Kos on 05.06.2022..
+//  Created by Barbara Kos on 08.06.2022..
 //
 
+import Foundation
 import UIKit
+import SnapKit
 import SDWebImage
 
-class ChatsTableViewCell: UITableViewCell {
-    static let id = "ChatsTableViewCell"
+class NewChatTableViewCell: UITableViewCell {
+    static let id = "NewChatTableViewCell"
     
     private var userImageView: UIImageView!
     private var usernameLabel: UILabel!
-    private var userMessageLabel: UILabel!
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -25,15 +26,10 @@ class ChatsTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-    }
-    
-    public func configure(with model: Conversation) {
-        userMessageLabel.text = model.latestMessage.text
-        usernameLabel.text = model.name
+    public func configure(with model: SearchResult) {
+        usernameLabel.text = model.username
         
-        let path = "images/\(model.otherUserEmail)_profile_picture.png"
+        let path = "images/\(model.email)_profile_picture.png"
         StorageManager.shared.downloadURL(for: path, completion: { [weak self] result in
             switch result {
             case .success(let url):
@@ -59,41 +55,30 @@ class ChatsTableViewCell: UITableViewCell {
         
         usernameLabel = UILabel()
         contentView.addSubview(usernameLabel)
-        
-        userMessageLabel = UILabel()
-        contentView.addSubview(userMessageLabel)
     }
     
     func styleViews() {
         userImageView.contentMode = .scaleAspectFill
-        userImageView.layer.cornerRadius = 50
+        userImageView.layer.cornerRadius = 35
         userImageView.layer.masksToBounds = true
         
         usernameLabel.font = .systemFont(ofSize: 21, weight: .semibold)
-        
-        userMessageLabel.font = .systemFont(ofSize: 19, weight: .regular)
-        userMessageLabel.numberOfLines = 0
     }
     
     func defineLayoutForViews() {
         userImageView.snp.makeConstraints {
             $0.leading.top.equalToSuperview().offset(10)
             $0.bottom.equalToSuperview().inset(10)
-            $0.width.equalTo(100)
-            $0.height.equalTo(100)
+            $0.width.equalTo(70)
+            $0.height.equalTo(70)
         }
         
         usernameLabel.snp.makeConstraints {
             $0.leading.equalTo(userImageView.snp.trailing).offset(10)
             $0.top.equalToSuperview().offset(20)
-        }
-        
-        userMessageLabel.snp.makeConstraints {
-            $0.leading.equalTo(userImageView.snp.trailing).offset(10)
-            $0.trailing.equalToSuperview().inset(10)
             $0.bottom.equalToSuperview().inset(20)
-            $0.top.equalTo(usernameLabel.snp.bottom).offset(10)
         }
     }
 
 }
+
