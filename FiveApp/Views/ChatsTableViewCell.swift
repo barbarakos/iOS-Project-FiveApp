@@ -85,14 +85,15 @@ class ChatsTableViewCell: UITableViewCell {
         
         usernameLabel.snp.makeConstraints {
             $0.leading.equalTo(userImageView.snp.trailing).offset(10)
-            $0.top.equalToSuperview().offset(20)
+            $0.top.trailing.equalToSuperview().offset(20)
+            $0.bottom.equalTo(userMessageLabel.snp.top).offset(-7)
         }
         
         userMessageLabel.snp.makeConstraints {
             $0.leading.equalTo(userImageView.snp.trailing).offset(10)
             $0.trailing.equalToSuperview().inset(10)
-            $0.bottom.equalToSuperview().inset(20)
-            $0.top.equalTo(usernameLabel.snp.bottom).offset(10)
+            $0.bottom.equalToSuperview().inset(10)
+            $0.top.equalTo(usernameLabel.snp.bottom).offset(7)
         }
     }
 
